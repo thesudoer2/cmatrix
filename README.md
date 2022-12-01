@@ -11,9 +11,13 @@ to use this program:
             #dnf install -y ncurses-devel
 
 
-to compile source code files:
+to compile source code files (manually):
 
       #gcc main.cpp tic_tac_toe.cpp -lstdc++ -lncurses -std=c++11 -o <output_name>
+
+
+to compile souce code files by make file, stay on src/ directory and:
+	  #make
 
 
 a sample of functionality of this program:
