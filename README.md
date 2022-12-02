@@ -17,7 +17,8 @@ to compile source code files (manually):
 
 
 to compile souce code files by make file, stay on src/ directory and:
-	  #make
+
+      #make
 
 
 a sample of functionality of this program:
