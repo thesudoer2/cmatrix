@@ -19,6 +19,16 @@ to compile source code files (manually):
 to compile souce code files by make file, stay on src/ directory and:
 
       #make
+      
+NOTE: of course, before using "make" program to compile the project, you must
+      install the "make" package:
+      
+      - on Ubuntu:
+         #apt-get install -y make
+
+      - on RockyLinux and CentOS:
+         #dnf install -y make
+      
 
 
 a sample of functionality of this program:
