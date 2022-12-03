@@ -27,6 +27,12 @@ void matrix::initializing_screen()
 	getmaxyx(this->board, this->board_max_y, this->board_max_x);
 }
 
+template <typename T>
+void matrix::vector_filler(std::vector<T> &target_vector, uint2_t elements_count, T element)
+{
+	target_vector.resize(elements_count, element);
+}
+
 void matrix::fill_vectors()
 {
 	matrix::vector_filler<bool>(this->is_used, this->board_max_x, false);

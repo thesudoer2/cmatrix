@@ -82,10 +82,7 @@ private:
 
 	// defining a template method to fill vectors
 	template <typename T>
-		void vector_filler(std::vector<T> &target_vector, uint2_t elements_count, T element)
-		{
-			target_vector.resize(elements_count, element);
-		}
+	void vector_filler(std::vector<T>&, uint2_t, T);
 
 	// the following function just call the vector_filler() function
 	// with correct arguments
