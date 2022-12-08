@@ -14,11 +14,11 @@ cmatrix: $(OBJECT_FILES)
 
 main.o: main.cpp
 	@printf "main.cpp -> main.o\n"
-	$(COMPILER) -c main.cpp $(CXXFLAGS) 
+	$(COMPILER) -O2 -c main.cpp $(CXXFLAGS) 
 
 matrix.o: matrix.cpp matrix.h
 	@printf "matrix.cpp -> matrix.o\n"
-	$(COMPILER) -c matrix.cpp $(CXXFLAGS)
+	$(COMPILER) -O2 -c matrix.cpp $(CXXFLAGS)
 
 
 clean:
