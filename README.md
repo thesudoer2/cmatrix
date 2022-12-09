@@ -13,7 +13,7 @@ to use this program:
 
 to compile source code files (manually):
 
-      #gcc main.cpp tic_tac_toe.cpp -lstdc++ -lncurses -std=c++11 -O2 -o <output_name>
+      #gcc main.cpp matrix.cpp -lstdc++ -lncurses -std=c++11 -O2 -o <output_name>
 
 
 to compile souce code files by make file, stay on src/ directory and:
