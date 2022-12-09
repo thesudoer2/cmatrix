@@ -105,66 +105,63 @@ void matrix::start_matrix()
 
 	uint2_t random_number;
 
-	while(true)
+	// first index is not used (from index 1 to (this->board_max_x - 2)
+	for (unsigned i {1}; i < (this->board_max_x - 2); ++i)
 	{
-		// first index is not used (from index 1 to (this->board_max_x - 2)
-		for (unsigned i {1}; i < (this->board_max_x - 2); ++i)
-		{
-			random_number = matrix::rand_pos_in_board();
+		random_number = matrix::rand_pos_in_board();
 
-			if(!this->is_used[random_number])
+		if(!this->is_used[random_number])
+		{
+			this->is_used[random_number] = true;
+			this->max_string_length[random_number] = matrix::rand_length();
+			this->current_char[random_number] = matrix::rand_char();
+		}
+
+		if (this->is_used[i])
+		{
+			wattron(this->board, COLOR_PAIR(1) | A_BOLD);
+			mvwaddch(this->board, this->current_y_pos[i], i, this->current_char[i]);
+			wattroff(this->board, COLOR_PAIR(1) | A_BOLD);
+
+
+			if (this->current_y_pos[i] == (this->board_max_y - 2))
 			{
-				this->is_used[random_number] = true;
-				this->max_string_length[random_number] = matrix::rand_length();
-				this->current_char[random_number] = matrix::rand_char();
+				this->is_end[i] = true;
 			}
 
-			if (this->is_used[i])
+			if (this->is_end[i])
 			{
-				wattron(this->board, COLOR_PAIR(1) | A_BOLD);
-				mvwaddch(this->board, this->current_y_pos[i], i, this->current_char[i]);
-				wattroff(this->board, COLOR_PAIR(1) | A_BOLD);
+				matrix::remove(i);
 
-
-				if (this->current_y_pos[i] == (this->board_max_y - 2))
-				{
-					this->is_end[i] = true;
-				}
-
-				if (this->is_end[i])
+				if (this->string_length[i] == 0)
 				{
 					matrix::remove(i);
+					matrix::release_index(i);
+					continue;
+				}
+			}
+			else
+			{
+				if (this->string_length[i] == this->max_string_length[i])
+				{
+					// this means removing characters from the board must be started
+					this->is_middle[i] = true;
+				}
 
-					if (this->string_length[i] == 0)
-					{
-						matrix::remove(i);
-						matrix::release_index(i);
-						continue;
-					}
+				if (this->is_middle[i])
+				{
+					add(i);
+					remove(i);
 				}
 				else
 				{
-					if (this->string_length[i] == this->max_string_length[i])
-					{
-						// this means removing characters from the board must be started
-						this->is_middle[i] = true;
-					}
-	
-					if (this->is_middle[i])
-					{
-						add(i);
-						remove(i);
-					}
-					else
-					{
-						add(i);
-					}
+					add(i);
 				}
-	
-				matrix::display();
 			}
 
-			std::this_thread::sleep_for(std::chrono::microseconds(20));
+			matrix::display();
+
+			std::this_thread::sleep_for(std::chrono::microseconds(200));
 		}
 	}
 }
